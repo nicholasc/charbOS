@@ -8,4 +8,4 @@ download_background_image() {
 
 mkdir -p "$BACKGROUNDS_DIR"
 
-source "$BACKGROUNDS_DIR/backgrounds.sh"; done
+source "$BACKGROUNDS_DIR/backgrounds.sh";
