@@ -1,6 +1,6 @@
-source ~/.local/share/omarchy/default/bash/shell
-source ~/.local/share/omarchy/default/bash/aliases
-source ~/.local/share/omarchy/default/bash/functions
-source ~/.local/share/omarchy/default/bash/prompt
-source ~/.local/share/omarchy/default/bash/init
-source ~/.local/share/omarchy/default/bash/envs
+source ~/.local/share/charbOS/default/bash/shell
+source ~/.local/share/charbOS/default/bash/aliases
+source ~/.local/share/charbOS/default/bash/functions
+source ~/.local/share/charbOS/default/bash/prompt
+source ~/.local/share/charbOS/default/bash/init
+source ~/.local/share/charbOS/default/bash/envs
