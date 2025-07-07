@@ -3,7 +3,7 @@ set -e
 trap 'echo "Error: $?"' ERR
 
 # Need gum to query for input
-yay -S --noconfirm --needed gum
+pacman -S --noconfirm --needed gum
 
 # Install all scripts in the install directory
 for f in ~/.local/share/charbOS/install/*.sh; do
