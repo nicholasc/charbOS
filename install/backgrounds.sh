@@ -8,4 +8,4 @@ download_background_image() {
 
 mkdir -p "$BACKGROUNDS_DIR"
 
-source "~/.config/theme/backgrounds.sh";
+source ~/.config/theme/backgrounds.sh;
