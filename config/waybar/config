@@ -130,7 +130,7 @@
   },
   "custom/power-menu": {
     "format": "󰐥",
-    "on-click": "~/.local/share/charbOS/bin/charbos-power-menu",
+    "on-click": "~/.charbOS/bin/charbos-power-menu",
     "tooltip": false
   }
 }

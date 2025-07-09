@@ -2,8 +2,8 @@
 
 # Cycles through the background images available
 
-BACKGROUNDS_DIR="$HOME/.config/theme/backgrounds/"
-CURRENT_BACKGROUND_LINK="$HOME/.config/theme/background"
+BACKGROUNDS_DIR="$HOME/.local/share/theme/backgrounds/"
+CURRENT_BACKGROUND_LINK="$HOME/.local/share/theme/background"
 
 BACKGROUNDS=($(find "$BACKGROUNDS_DIR" -type f | sort))
 TOTAL=${#BACKGROUNDS[@]}

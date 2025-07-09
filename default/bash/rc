@@ -1,6 +1,6 @@
-source ~/.local/share/charbOS/default/bash/shell
-source ~/.local/share/charbOS/default/bash/aliases
-source ~/.local/share/charbOS/default/bash/functions
-source ~/.local/share/charbOS/default/bash/prompt
-source ~/.local/share/charbOS/default/bash/init
-source ~/.local/share/charbOS/default/bash/envs
+source ~/.charbOS/default/bash/shell
+source ~/.charbOS/default/bash/aliases
+source ~/.charbOS/default/bash/functions
+source ~/.charbOS/default/bash/prompt
+source ~/.charbOS/default/bash/init
+source ~/.charbOS/default/bash/envs

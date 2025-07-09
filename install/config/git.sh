@@ -7,10 +7,10 @@ git config --global pull.rebase true
 git config --global init.defaultBranch master
 
 # Set identification from install inputs
-if [[ -n "${CHARBOS_USER_NAME//[[:space:]]/}" ]]; then
-  git config --global user.name "$CHARBOS_USER_NAME"
+if [[ -n "${CHARBOS_NAME//[[:space:]]/}" ]]; then
+  git config --global user.name "$CHARBOS_NAME"
 fi
 
-if [[ -n "${CHARBOS_USER_EMAIL//[[:space:]]/}" ]]; then
-  git config --global user.email "$CHARBOS_USER_EMAIL"
+if [[ -n "${CHARBOS_EMAIL//[[:space:]]/}" ]]; then
+  git config --global user.email "$CHARBOS_EMAIL"
 fi

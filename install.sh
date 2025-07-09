@@ -1,17 +1,43 @@
+logo='           /██                           /██        /▄████▄   /▄████▄ 
+          | ██                          | ██       /██__  ██ /██__  ██
+  /▄█████▄| ██████▄   /▄████▄   /▄████▄ | ██████▄ | ██  \ ██| ██  \__/
+ /██_____/| ██__  ██ |____  ██ /██__  ▀█| ██__  ██| ██  | ██|  ▀████▄ 
+| ██      | ██  \ ██  /▄██████| ██  \__/| ██  \ ██| ██  | ██ \____  ██
+| ██      | ██  | ██ /██__  ██| ██      | ██  | ██| ██  | ██ /██  \ ██
+|  ▀█████▀| ██  | ██|  ▀██████| ██      | ██████▀/|  ▀████▀/|  ▀████▀/
+ \_______/|__/  |__/ \_______/|__/      |_______/  \______/  \______/ '
+
+echo -e "\n$logo\n"
+
 # Exit on error
 set -e
-trap 'echo "Error: $?"' ERR
+trap 'echo "Error: charbOS failed to install. Please check the logs for more information."' ERR
 
-# Need gum to query for input
-sudo pacman -S --noconfirm --needed gum
+# install_package(package, items...)
+#   - package: The package to install.
+#   - item: The item to install.
+install_package() {
+  local package="$1"
+  local items=("${@:2}")
 
-# Install all scripts in the install directory
-for f in ~/.local/share/charbOS/install/*.sh; do
-    echo "\nInstalling $f"
-    source "$f"
+  for item in "${items[@]}"; do
+    echo "\nInstalling $item"
+    source "~/.charbOS/install/$package/$item.sh"
+  done
+}
+
+# Packages to install
+packages=("core" "config" "development" "applications")
+
+# Install charbOS
+echo -e "\nBeginning installation..."
+for package in "${packages[@]}"; do
+  echo "\nInstalling $package"
+  source "~/.charbOS/install/$package/main.sh"
 done
 
-# Ensure locate is up to date now that everything has been installed
+# Update plocate database
 sudo updatedb
 
+# Reboot
 gum confirm "Reboot ?" && reboot

@@ -4,7 +4,7 @@
 # using wofi for an interactive search menu.
 
 USER_HYPRLAND_CONF="$HOME/.config/hypr/hyprland.conf"
-CHARBOS_BINDINGS_CONF="$HOME/.local/share/charbOS/default/hypr/bindings.conf"
+CHARBOS_BINDINGS_CONF="$HOME/.charbOS/default/hypr/bindings.conf"
 
 # Process the configuration file to extract and format keybindings
 # 1. `grep` finds all lines starting with 'bind' (allowing for leading spaces).

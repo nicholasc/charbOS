@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Overwrite local waybar settings with the latest
-cp -f ~/.local/share/charbos/config/waybar/config ~/.config/waybar/ 2>/dev/null
-cp -f ~/.local/share/charbos/config/waybar/style.css ~/.config/waybar/ 2>/dev/null
+cp -f ~/.charbOS/config/waybar/config ~/.config/waybar/ 2>/dev/null
+cp -f ~/.charbOS/config/waybar/style.css ~/.config/waybar/ 2>/dev/null
 
 # Restart waybar
 pkill waybar &>/dev/null
