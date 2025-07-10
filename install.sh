@@ -72,7 +72,7 @@ install_package() {
   for item in "${items[@]}"; do
     source ~/.charbOS/install/$package/$item.sh
   done
-}i
+}
 
 # Install charbOS packages
 packages=("core" "config" "development" "applications")
