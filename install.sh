@@ -12,7 +12,9 @@ logo='           /██                           /██        /▄███�
 set -e
 trap 'echo "Error: charbOS failed to install. Please check the logs for more information."' ERR
 
-# Install base-devel, git and gum
+echo -e "\n$logo\n"
+
+# Install gum for shell interactions
 sudo pacman -S --noconfirm --needed gum
 
 clear
@@ -23,7 +25,9 @@ gum style --border normal --margin "1" --padding "1 2" --border-foreground 212 "
 export CHARBOS_NAME=$(gum input --placeholder "Enter full name" --prompt "Name> ")
 export CHARBOS_EMAIL=$(gum input --placeholder "Enter email address" --prompt "Email> ")
 
-sudo pacman -S --noconfirm --needed base-devel git gum
+# Install dependencies
+gum spin --spinner=points --title="Installing dependencies..." \
+  -- sudo pacman -S --noconfirm --needed base-devel git 
 
 # Clone charbOS
 echo -e "\nCloning charbOS..."
@@ -58,7 +62,8 @@ install_package() {
   local items=("${@:2}")
 
   for item in "${items[@]}"; do
-    gum spin --title "Installing $package: $item..." -- source ~/.charbOS/install/$package/$item.sh
+    gum spin --spinner=points --title="Installing $package: $item..." \
+      -- bash ~/.charbOS/install/$package/$item.sh
   done
 }
 
