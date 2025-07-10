@@ -22,7 +22,7 @@ install_package() {
 
   for item in "${items[@]}"; do
     echo "\nInstalling $item"
-    source "~/.charbOS/install/$package/$item.sh"
+    source ~/.charbOS/install/$package/$item.sh
   done
 }
 
@@ -57,7 +57,7 @@ packages=("core" "config" "development" "applications")
 # Install charbOS
 echo -e "\nBeginning installation..."
 for package in "${packages[@]}"; do
-  echo -e "\nInstalling $package"
+  echo -e "Installing $package..."
   source ~/.charbOS/install/$package/main.sh
 done
 
