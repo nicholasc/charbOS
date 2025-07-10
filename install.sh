@@ -49,7 +49,7 @@ packages=("core" "config" "development" "applications")
 echo -e "\nBeginning installation..."
 for package in "${packages[@]}"; do
   echo "\nInstalling $package"
-  source "~/.charbOS/install/$package/main.sh"
+  source ~/.charbOS/install/$package/main.sh
 done
 
 # Update plocate database
