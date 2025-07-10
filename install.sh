@@ -13,13 +13,13 @@ echo -e "\n$logo\n"
 set -e
 trap 'echo "Error: charbOS failed to install. Please check the logs for more information."' ERR
 
+# Install base-devel, git and gum
+sudo pacman -S --noconfirm --needed base-devel git gum > /dev/null 2>&1
+
 # Get user information
 gum style --border normal --margin "1" --padding "1 2" --border-foreground 212 "First, let's get some information about $(gum style --foreground 212 'you')."
 export CHARBOS_NAME=$(gum input --placeholder "Enter full name" --prompt "Name> ")
 export CHARBOS_EMAIL=$(gum input --placeholder "Enter email address" --prompt "Email> ")
-
-# Install base-devel and git
-sudo pacman -S --noconfirm --needed base-devel git
 
 # Clone charbOS
 echo -e "\nCloning charbOS..."
