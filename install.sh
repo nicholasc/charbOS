@@ -26,8 +26,8 @@ install_package() {
   done
 }
 
-# Install git
-sudo pacman -S --noconfirm --needed git
+# Install base-devel and git
+sudo pacman -S --noconfirm --needed base-devel git
 
 # Clone charbOS
 echo -e "\nCloning charbOS..."
@@ -42,13 +42,22 @@ if [[ -n "$CHARBOS_BRANCH" ]]; then
   cd -
 fi
 
+# YAY to install AUR packages
+if ! command -v yay &>/dev/null; then
+  git clone https://aur.archlinux.org/yay-bin.git
+  cd yay-bin
+  makepkg -si --noconfirm
+  cd ~
+  rm -rf yay-bin
+fi
+
 # Packages to install
 packages=("core" "config" "development" "applications")
 
 # Install charbOS
 echo -e "\nBeginning installation..."
 for package in "${packages[@]}"; do
-  echo "\nInstalling $package"
+  echo -e "\nInstalling $package"
   source ~/.charbOS/install/$package/main.sh
 done
 
