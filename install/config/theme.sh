@@ -11,8 +11,10 @@ download_background_image() {
 }
 
 # Install theme background images
+gum log --level info "Installing theme background images..."
 mkdir -p "$BACKGROUNDS_DIR"
 download_background_image "https://github.com/basecamp/omakub/raw/refs/heads/master/themes/gruvbox/background.jpg" "background1.jpg"
 
 # Set initial background
+gum log --level info "Setting initial background..."
 ln -snf ~/.local/share/theme/backgrounds/background1.jpg ~/.local/share/theme/background

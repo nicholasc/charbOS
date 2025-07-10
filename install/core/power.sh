@@ -4,8 +4,10 @@ yay -S --noconfirm power-profiles-daemon
 
 if ls /sys/class/power_supply/BAT* &>/dev/null; then
   # This computer runs on a battery
+  gum log --level info "Setting power profile to balanced..."
   powerprofilesctl set balanced || true
 else
   # This computer runs on power outlet
+  gum log --level info "Setting power profile to performance..."
   powerprofilesctl set performance || true
 fi

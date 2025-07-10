@@ -1,8 +1,11 @@
+gum log --level info "Installing basic fonts..."
 yay -Sy --noconfirm --needed ttf-font-awesome noto-fonts noto-fonts-emoji noto-fonts-cjk noto-fonts-extra
 
 mkdir -p ~/.local/share/fonts
 
 if ! fc-list | grep -qi "CaskaydiaMono Nerd Font"; then
+  gum log --level info "Installing CaskaydiaMono Nerd Font..."
+
   cd /tmp
   wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/CascadiaMono.zip
   unzip CascadiaMono.zip -d CascadiaFont
@@ -16,6 +19,8 @@ if ! fc-list | grep -qi "CaskaydiaMono Nerd Font"; then
 fi
 
 if ! fc-list | grep -qi "iA Writer Mono S"; then
+  gum log --level info "Installing iA Writer Mono S..."
+
   cd /tmp
   wget -O iafonts.zip https://github.com/iaolo/iA-Fonts/archive/refs/heads/master.zip
   unzip iafonts.zip -d iaFonts

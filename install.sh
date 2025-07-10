@@ -10,7 +10,7 @@ logo='           /██                           /██        /▄███�
 
 # Exit on error
 set -e
-trap 'echo "Error: charbOS failed to install. Please check the logs for more information."' ERR
+trap 'gum log --level error "Error: charbOS failed to install. Please check the logs for more information."' ERR
 
 echo -e "\n$logo\n"
 
@@ -30,12 +30,14 @@ gum spin --spinner=points --title="Installing dependencies..." \
   -- sudo pacman -S --noconfirm --needed base-devel git 
 
 clone_charbOS() {
+  gum log --level info "Cloning charbOS..."
+
   rm -rf ~/.charbOS/
   git clone https://github.com/nicholasc/charbOS.git ~/.charbOS
 
   # Use custom branch if instructed
   if [[ -n "$CHARBOS_BRANCH" ]]; then
-    echo -e "Selecting branch: $CHARBOS_BRANCH"
+    gum log --level info "Selecting branch: $CHARBOS_BRANCH"
     cd ~/.charbOS
     git fetch origin "${CHARBOS_BRANCH}" && git checkout "${CHARBOS_BRANCH}"
     cd -
@@ -51,7 +53,12 @@ gum spin --spinner=points --title="Cloning charbOS..." \
 install_yay() {
   # YAY to install AUR packages
   if ! command -v yay &>/dev/null; then
+    gum log --level info "Cloning yay ..."
+
     git clone https://aur.archlinux.org/yay-bin.git
+
+    gum log --level info "Installing yay from source..."
+
     cd yay-bin
     makepkg -si --noconfirm
     cd ~
