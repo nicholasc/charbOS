@@ -26,6 +26,22 @@ install_package() {
   done
 }
 
+# Install git
+yay -S --noconfirm --needed git
+
+# Clone charbOS
+echo -e "\nCloning charbOS..."
+rm -rf ~/.charbOS/
+git clone https://github.com/nicholasc/charbOS.git ~/.charbOS >/dev/null
+
+# Use custom branch if instructed
+if [[ -n "$CHARBOS_BRANCH" ]]; then
+  echo -e "\eSelecting branch: $CHARBOS_BRANCH"
+  cd ~/.charbOS
+  git fetch origin "${CHARBOS_BRANCH}" && git checkout "${CHARBOS_BRANCH}"
+  cd -
+fi
+
 # Packages to install
 packages=("core" "config" "development" "applications")
 
