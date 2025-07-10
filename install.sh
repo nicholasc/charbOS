@@ -29,27 +29,39 @@ export CHARBOS_EMAIL=$(gum input --placeholder "Enter email address" --prompt "E
 gum spin --spinner=points --title="Installing dependencies..." \
   -- sudo pacman -S --noconfirm --needed base-devel git 
 
-# Clone charbOS
-echo -e "\nCloning charbOS..."
-rm -rf ~/.charbOS/
-git clone https://github.com/nicholasc/charbOS.git ~/.charbOS >/dev/null
+clone_charbOS() {
+  # Clone charbOS
+  echo -e "\nCloning charbOS..."
+  rm -rf ~/.charbOS/
+  git clone https://github.com/nicholasc/charbOS.git ~/.charbOS >/dev/null
 
-# Use custom branch if instructed
-if [[ -n "$CHARBOS_BRANCH" ]]; then
-  echo -e "\eSelecting branch: $CHARBOS_BRANCH"
-  cd ~/.charbOS
-  git fetch origin "${CHARBOS_BRANCH}" && git checkout "${CHARBOS_BRANCH}"
-  cd -
-fi
+  # Use custom branch if instructed
+  if [[ -n "$CHARBOS_BRANCH" ]]; then
+    echo -e "\eSelecting branch: $CHARBOS_BRANCH"
+    cd ~/.charbOS
+    git fetch origin "${CHARBOS_BRANCH}" && git checkout "${CHARBOS_BRANCH}"
+    cd -
+  fi
+}
 
-# YAY to install AUR packages
-if ! command -v yay &>/dev/null; then
-  git clone https://aur.archlinux.org/yay-bin.git
-  cd yay-bin
-  makepkg -si --noconfirm
-  cd ~
-  rm -rf yay-bin
-fi
+# Install charbOS repository
+gum spin --spinner=points --title="Cloning charbOS..." \
+  -- clone_charbOS
+
+install_yay() {
+  # YAY to install AUR packages
+  if ! command -v yay &>/dev/null; then
+    git clone https://aur.archlinux.org/yay-bin.git
+    cd yay-bin
+    makepkg -si --noconfirm
+    cd ~
+    rm -rf yay-bin
+  fi
+}
+
+# Install yay
+gum spin --spinner=points --title="Installing yay..." \
+  -- install_yay
 
 # Packages to install
 packages=("core" "config" "development" "applications")
@@ -76,4 +88,4 @@ done
 sudo updatedb
 
 # Reboot
-gum confirm "Reboot ?" && reboot
+gum confirm "Install complete! Reboot ?" && reboot

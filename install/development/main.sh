@@ -1,5 +1,6 @@
 # Development related packages
-yay -S --noconfirm --needed cargo clang llvm nvm
+gum spin --spinner=points --title="Installing development: dependencies..." \
+  -- yay -S --noconfirm --needed cargo clang llvm nvm
 
 # Install development items
 items=("docker")
