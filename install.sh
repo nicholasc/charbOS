@@ -46,7 +46,7 @@ clone_charbOS() {
 
 # Install charbOS repository
 gum spin --spinner=points --title="Cloning charbOS..." \
-  -- clone_charbOS
+  -- bash -c "clone_charbOS"
 
 install_yay() {
   # YAY to install AUR packages
@@ -61,7 +61,7 @@ install_yay() {
 
 # Install yay
 gum spin --spinner=points --title="Installing yay..." \
-  -- install_yay
+  -- bash -c "install_yay"
 
 # Packages to install
 packages=("core" "config" "development" "applications")
