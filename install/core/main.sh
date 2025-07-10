@@ -1,6 +1,8 @@
+# Print package name
+gum style --bold --foreground 2 "Installing core packages..."
+
 # Install core items from AUR
-gum spin --spinner=points --title="Installing core: dependencies..." \
-  -- yay -S --noconfirm --needed wget curl unzip inetutils fd eza ripgrep  \
+_ yay -S --noconfirm --needed wget curl unzip inetutils fd eza ripgrep  \
   zoxide bat wl-clipboard fastfetch btop man tldr less whois plocate alacritty nvim      \
   bash-completion
 

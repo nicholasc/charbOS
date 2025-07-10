@@ -7,73 +7,60 @@ logo='           /██                           /██        /▄███�
 |  ▀█████▀| ██  | ██|  ▀██████| ██      | ██████▀/|  ▀████▀/|  ▀████▀/
  \_______/|__/  |__/ \_______/|__/      |_______/  \______/  \______/ '
 
-
 # Exit on error
 set -e
+
+# Print logo
+echo -e "\n$logo\n"
+
+# Install gum in the background
+if ! command -v gum &>/dev/null; then
+  sudo pacman -S --noconfirm --needed gum &>/dev/null && wait $!
+fi
+
+# Exit on error
 trap 'gum log --level error "Error: charbOS failed to install. Please check the logs for more information."' ERR
 
-echo -e "\n$logo\n"
+# Run a command silently
+_() { "$@" &>/dev/null && wait $!; }
 
-# Install gum for shell interactions
-sudo pacman -S --noconfirm --needed gum
-
-clear
-echo -e "\n$logo\n"
+# Print message
+gum --style info "Ready to install charbOS!"
 
 # Get user information
-gum style --border normal --margin "1" --padding "1 2" --border-foreground 212 "First, let's get some information about $(gum style --foreground 212 'you')."
-export CHARBOS_NAME=$(gum input --placeholder "Enter full name" --prompt "Name> ")
-export CHARBOS_EMAIL=$(gum input --placeholder "Enter email address" --prompt "Email> ")
+gum style --bold --foreground 2 "Identify yourself."
+export CHARBOS_NAME=$(gum input --placeholder "Enter full name" --prompt "Name: ")
+export CHARBOS_EMAIL=$(gum input --placeholder "Enter email address" --prompt "Email: ")
+
+# Clone charbOS
+gum log --level info "Cloning charbOS..."
 
 # Install dependencies
-gum spin --spinner=points --title="Installing dependencies..." \
-  -- sudo pacman -S --noconfirm --needed base-devel git 
+_ sudo pacman -S --noconfirm --needed git
 
-clone_charbOS() {
-  gum log --level info "Cloning charbOS..."
+rm -rf ~/.charbOS/
+_ git clone -q https://github.com/nicholasc/charbOS.git ~/.charbOS
 
-  rm -rf ~/.charbOS/
-  git clone https://github.com/nicholasc/charbOS.git ~/.charbOS
+# Use custom branch if instructed
+if [[ -n "$CHARBOS_BRANCH" ]]; then
+  gum log --level info "Selecting branch: $CHARBOS_BRANCH"
+  cd ~/.charbOS
+  git fetch origin "${CHARBOS_BRANCH}" && git checkout "${CHARBOS_BRANCH}"
+  cd -
+fi
 
-  # Use custom branch if instructed
-  if [[ -n "$CHARBOS_BRANCH" ]]; then
-    gum log --level info "Selecting branch: $CHARBOS_BRANCH"
-    cd ~/.charbOS
-    git fetch origin "${CHARBOS_BRANCH}" && git checkout "${CHARBOS_BRANCH}"
-    cd -
-  fi
+# YAY to install AUR packages
+if ! command -v yay &>/dev/null; then
+  gum log --level info "Building yay from source..."
 
-  true
-}
+  _ git clone https://aur.archlinux.org/yay-bin.git
 
-# Install charbOS repository using the function within a subshell for gum spin
-gum spin --spinner=points --title="Cloning charbOS..." \
-  -- bash -c "$(declare -f clone_charbOS); clone_charbOS"
+  cd yay-bin
+  _ makepkg -si --noconfirm
 
-install_yay() {
-  # YAY to install AUR packages
-  if ! command -v yay &>/dev/null; then
-    gum log --level info "Cloning yay ..."
-
-    git clone https://aur.archlinux.org/yay-bin.git
-
-    gum log --level info "Installing yay from source..."
-
-    cd yay-bin
-    makepkg -si --noconfirm
-    cd ~
-    rm -rf yay-bin
-  fi
-
-  true
-}
-
-# Install yay
-gum spin --spinner=points --title="Installing yay..." \
-  -- bash -c "$(declare -f install_yay); install_yay"
-
-# Packages to install
-packages=("core" "config" "development" "applications")
+  cd ~
+  rm -rf yay-bin
+fi
 
 # install_package(package, items...)
 #   - package: The package to install.
@@ -83,18 +70,18 @@ install_package() {
   local items=("${@:2}")
 
   for item in "${items[@]}"; do
-    gum spin --spinner=points --title="Installing $package: $item..." \
-      -- bash ~/.charbOS/install/$package/$item.sh
+    source ~/.charbOS/install/$package/$item.sh
   done
 }
 
-# Install charbOS
+# Install charbOS packages
+packages=("core" "config" "development" "applications")
 for package in "${packages[@]}"; do
   source ~/.charbOS/install/$package/main.sh
 done
 
 # Update plocate database
-sudo updatedb
+_ sudo updatedb
 
 # Reboot
 gum confirm "Install complete! Reboot ?" && reboot
