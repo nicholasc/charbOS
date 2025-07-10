@@ -30,10 +30,8 @@ gum spin --spinner=points --title="Installing dependencies..." \
   -- sudo pacman -S --noconfirm --needed base-devel git 
 
 clone_charbOS() {
-  # Clone charbOS
-  echo -e "\nCloning charbOS..."
   rm -rf ~/.charbOS/
-  git clone https://github.com/nicholasc/charbOS.git ~/.charbOS >/dev/null
+  git clone https://github.com/nicholasc/charbOS.git ~/.charbOS
 
   # Use custom branch if instructed
   if [[ -n "$CHARBOS_BRANCH" ]]; then
@@ -61,7 +59,7 @@ install_yay() {
 
 # Install yay
 gum spin --spinner=points --title="Installing yay..." \
-  -- bash -c "install_yay"
+  -- bash -c "$(declare -f install_yay); install_yay"
 
 # Packages to install
 packages=("core" "config" "development" "applications")
