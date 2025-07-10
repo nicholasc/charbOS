@@ -21,7 +21,7 @@ install_package() {
   local items=("${@:2}")
 
   for item in "${items[@]}"; do
-    echo "\nInstalling $item"
+    echo -e "Installing $item..."
     source ~/.charbOS/install/$package/$item.sh
   done
 }
