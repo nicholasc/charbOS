@@ -25,7 +25,7 @@ trap 'gum log --level error "Error: charbOS failed to install. Please check the 
 _() { "$@" &>/dev/null && wait $!; }
 
 # Print message
-gum log --style info "Ready to install charbOS!"
+gum log --level info "Ready to install charbOS!"
 
 # Get user information
 gum style --bold --foreground 2 "Identify yourself."
@@ -72,7 +72,7 @@ install_package() {
   for item in "${items[@]}"; do
     source ~/.charbOS/install/$package/$item.sh
   done
-}
+}i
 
 # Install charbOS packages
 packages=("core" "config" "development" "applications")
