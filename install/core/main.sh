@@ -9,5 +9,5 @@ export CHARBOS_NAME=$(gum input --placeholder "Enter full name" --prompt "Name> 
 export CHARBOS_EMAIL=$(gum input --placeholder "Enter email address" --prompt "Email> ")
 
 # Install core items
-items=("power" "nvidia" "bluetooth" "hyprland" "desktop" "fonts" "mimetypes")
+items=("nvidia" "bluetooth" "hyprland" "desktop" "fonts" "mimetypes" "power")
 install_package "core" $items
