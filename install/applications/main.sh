@@ -1,3 +1,3 @@
 # Install applications
 items=("webapps" "xtras")
-install_package "applications" $items
+install_package "applications" "${items[@]}"

@@ -26,4 +26,4 @@ EOF
 
 # Install config items
 items=("git" "theme")
-install_package "config" $items
+install_package "config" "${items[@]}"
