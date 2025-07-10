@@ -70,7 +70,6 @@ install_package() {
   local items=("${@:2}")
 
   for item in "${items[@]}"; do
-    gum log --level info "Installing $item..."
     source ~/.charbOS/install/$package/$item.sh
   done
 }
