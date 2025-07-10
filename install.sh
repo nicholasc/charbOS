@@ -37,16 +37,16 @@ clone_charbOS() {
 
   # Use custom branch if instructed
   if [[ -n "$CHARBOS_BRANCH" ]]; then
-    echo -e "\eSelecting branch: $CHARBOS_BRANCH"
+    echo -e "Selecting branch: $CHARBOS_BRANCH"
     cd ~/.charbOS
     git fetch origin "${CHARBOS_BRANCH}" && git checkout "${CHARBOS_BRANCH}"
     cd -
   fi
 }
 
-# Install charbOS repository
+# Install charbOS repository using the function within a subshell for gum spin
 gum spin --spinner=points --title="Cloning charbOS..." \
-  -- bash -c "clone_charbOS"
+  -- bash -c "$(declare -f clone_charbOS); clone_charbOS"
 
 install_yay() {
   # YAY to install AUR packages
