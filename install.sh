@@ -40,6 +40,8 @@ clone_charbOS() {
     git fetch origin "${CHARBOS_BRANCH}" && git checkout "${CHARBOS_BRANCH}"
     cd -
   fi
+
+  true
 }
 
 # Install charbOS repository using the function within a subshell for gum spin
@@ -55,6 +57,8 @@ install_yay() {
     cd ~
     rm -rf yay-bin
   fi
+
+  true
 }
 
 # Install yay
