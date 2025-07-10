@@ -13,18 +13,10 @@ echo -e "\n$logo\n"
 set -e
 trap 'echo "Error: charbOS failed to install. Please check the logs for more information."' ERR
 
-# install_package(package, items...)
-#   - package: The package to install.
-#   - item: The item to install.
-install_package() {
-  local package="$1"
-  local items=("${@:2}")
-
-  for item in "${items[@]}"; do
-    echo -e "Installing $item..."
-    source ~/.charbOS/install/$package/$item.sh
-  done
-}
+# Get user information
+gum style --border normal --margin "1" --padding "1 2" --border-foreground 212 "First, let's get some information about $(gum style --foreground 212 'you')."
+export CHARBOS_NAME=$(gum input --placeholder "Enter full name" --prompt "Name> ")
+export CHARBOS_EMAIL=$(gum input --placeholder "Enter email address" --prompt "Email> ")
 
 # Install base-devel and git
 sudo pacman -S --noconfirm --needed base-devel git
@@ -54,10 +46,20 @@ fi
 # Packages to install
 packages=("core" "config" "development" "applications")
 
+# install_package(package, items...)
+#   - package: The package to install.
+#   - item: The item to install.
+install_package() {
+  local package="$1"
+  local items=("${@:2}")
+
+  for item in "${items[@]}"; do
+    gum spin --title "Installing $package: $item..." -- source ~/.charbOS/install/$package/$item.sh
+  done
+}
+
 # Install charbOS
-echo -e "\nBeginning installation..."
 for package in "${packages[@]}"; do
-  echo -e "Installing $package..."
   source ~/.charbOS/install/$package/main.sh
 done
 
