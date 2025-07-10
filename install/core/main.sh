@@ -10,4 +10,4 @@ export CHARBOS_EMAIL=$(gum input --placeholder "Enter email address" --prompt "E
 
 # Install core items
 items=("nvidia" "bluetooth" "hyprland" "desktop" "fonts" "mimetypes" "power")
-install_package "core" $items
+install_package "core" "${items[@]}"
