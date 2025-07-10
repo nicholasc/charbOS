@@ -3,8 +3,6 @@ yay -S --noconfirm --needed base-devel gum wget curl unzip inetutils fd eza ripg
   zoxide bat wl-clipboard fastfetch btop man tldr less whois plocate alacritty nvim      \
   bash-completion
 
-
-
 # YAY to install AUR packages
 if ! command -v yay &>/dev/null; then
   git clone https://aur.archlinux.org/yay-bin.git

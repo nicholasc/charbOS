@@ -27,7 +27,7 @@ install_package() {
 }
 
 # Install git
-yay -S --noconfirm --needed git
+sudo pacman -S --noconfirm --needed git
 
 # Clone charbOS
 echo -e "\nCloning charbOS..."
