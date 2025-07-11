@@ -6,7 +6,7 @@ yay -S --noconfirm --needed brightnessctl playerctl pamixer pavucontrol wireplum
 # Common desktop apps
 gum log --level info "Installing common desktop apps..."
 yay -S --noconfirm --needed nautilus sushi ffmpegthumbnailer gnome-calculator chromium   \
-  chromium mpv evince imv localsend-bin 1password-beta 1password-cli
+  chromium mpv evince imv localsend-bin
 
 # Use dark mode for QT apps
 gum log --level info "Installing dark mode for QT apps..."
