@@ -21,9 +21,6 @@ fi
 # Exit on error
 trap 'gum log --level error "Error: charbOS failed to install. Please check the logs for more information."' ERR
 
-# Run a command silently
-_() { "$@" &>/dev/null && wait $!; }
-
 # Print message
 gum log --level info "Ready to install charbOS!"
 
@@ -36,10 +33,10 @@ export CHARBOS_EMAIL=$(gum input --placeholder "Enter email address" --prompt "E
 gum log --level info "Cloning charbOS..."
 
 # Install dependencies
-_ sudo pacman -S --noconfirm --needed git
+sudo pacman -S --noconfirm --needed git
 
 rm -rf ~/.charbOS/
-_ git clone -q https://github.com/nicholasc/charbOS.git ~/.charbOS
+git clone -q https://github.com/nicholasc/charbOS.git ~/.charbOS
 
 # Use custom branch if instructed
 if [[ -n "$CHARBOS_BRANCH" ]]; then
@@ -53,10 +50,10 @@ fi
 if ! command -v yay &>/dev/null; then
   gum log --level info "Building yay from source..."
 
-  _ git clone https://aur.archlinux.org/yay-bin.git
+  git clone https://aur.archlinux.org/yay-bin.git
 
   cd yay-bin
-  _ makepkg -si --noconfirm
+  makepkg -si --noconfirm
 
   cd ~
   rm -rf yay-bin
@@ -81,7 +78,7 @@ for package in "${packages[@]}"; do
 done
 
 # Update plocate database
-_ sudo updatedb
+sudo updatedb
 
 # Reboot
 gum confirm "Install complete! Reboot ?" && reboot

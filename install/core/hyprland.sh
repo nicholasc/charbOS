@@ -1,6 +1,6 @@
 # Hyprland related packages
 gum log --level info "Installing Hyprland related packages..."
-_ yay -S --noconfirm --needed hyprland hyprshot hyprpicker hyprlock hypridle               \
+yay -S --noconfirm --needed hyprland hyprshot hyprpicker hyprlock hypridle               \
   hyprpolkitagent hyprland-qtutils wofi waybar mako swaybg xdg-desktop-portal-hyprland     \
   xdg-desktop-portal-gtk
 
