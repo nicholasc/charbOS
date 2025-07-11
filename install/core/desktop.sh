@@ -15,5 +15,12 @@ sudo pacman -S --noconfirm kvantum-qt5
 # Install Gnome theme
 gum log --level info "Installing Gnome theme..."
 sudo pacman -S --noconfirm gnome-themes-extra
-gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+
+git clone https://github.com/vinceliuice/Orchis-theme.git ~/.orchis
+cd ~/.orchis
+./install.sh -n charbOS -l -c dark -t yellow --tweaks solid black macos
+cd -
+rm -rf ~/.orchis
+
+gsettings set org.gnome.desktop.interface gtk-theme "charbOS-Yellow-Dark"
 gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
