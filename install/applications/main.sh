@@ -1,3 +1,3 @@
 # Install applications
-items=("webapps" "xtras")
+items=("cursor" "webapps" "xtras")
 install_package "applications" "${items[@]}"
