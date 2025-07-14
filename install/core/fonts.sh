@@ -5,6 +5,7 @@ yay -Sy --noconfirm --needed ttf-font-awesome noto-fonts noto-fonts-emoji noto-f
 
 mkdir -p ~/.local/share/fonts
 
+# FiraCode Nerd Font 
 if ! fc-list | grep -qi "FiraCode Nerd Font"; then
   cd /tmp
   wget https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip

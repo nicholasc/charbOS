@@ -24,3 +24,4 @@ rm -rf ~/.orchis
 
 gsettings set org.gnome.desktop.interface gtk-theme "charbOS-Yellow-Dark"
 gsettings set org.gnome.desktop.interface color-scheme "prefer-dark"
+gsettings set org.gnome.desktop.interface text-scaling-factor 0.8
