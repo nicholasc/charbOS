@@ -2,7 +2,7 @@
 Version=1.0
 Name=Cursor
 Comment=The AI Code Editor
-Exec=cursor
+Exec=cursor %U
 Terminal=false
 Type=Application
 Icon=Cursor
