@@ -10,7 +10,7 @@
 # Use "start", "mid" and "end" for three color gradient
 
 # Main background, empty for terminal default, need to be empty if you want transparent background
-theme[main_bg]="#282828"
+theme[main_bg]="#1d2021"
 
 # Main text color
 theme[main_fg]="#a89984"
@@ -22,13 +22,13 @@ theme[title]="#ebdbb2"
 theme[hi_fg]="#d79921"
 
 # Background color of selected items
-theme[selected_bg]="#282828"
+theme[selected_bg]="#1d2021"
 
 # Foreground color of selected items
 theme[selected_fg]="#fabd2f"
 
 # Color of inactive/disabled text
-theme[inactive_fg]="#282828"
+theme[inactive_fg]="#1d2021"
 
 # Color of text appearing on top of graphs, i.e uptime and current network graph scaling
 theme[graph_text]="#585858"
